@@ -15,7 +15,7 @@ class TrustPayServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->publishes(array(
-            __DIR__.'/../config/trustpay.php' => config_path('trustpay.php'),
+            __DIR__.'/../config/config.php' => config_path('trustpay.php'),
         ));
     }
 
