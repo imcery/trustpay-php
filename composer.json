@@ -1,12 +1,34 @@
 {
-  "name": "imcery/trustpay-php",
-  "description": "TrustPay COPYandPAY package for Laravel 5",
-  "authors": [
-    {
-      "name": "Pavel Saparov",
-      "email": "pavel@imcery.com"
-    }
-  ],
-  "minimum-stability": "dev",
-  "require": {}
+    "name": "imcery/trustpay-php",
+    "description": "TrustPay COPYandPAY package for Laravel 5",
+    "homepage": "https://github.com/imcery/trustpay-php",
+    "keywords": ["trustpay", "php", "laravel"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Pavel Saparov",
+            "email": "pavel@imcery.com",
+            "homepage": "https://imcery.com/"
+        }
+    ],
+    "require": {
+        "php": ">=7.0.0",
+        "ext-curl": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Imcery\\TrustPay\\": "src/TrustPay"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Imcery\\TrustPay\\TrustPayServiceProvider"
+            ],
+            "aliases": {
+                "TrustPay": "Imcery\\TrustPay\\Facades\\TrustPay"
+            }
+        }
+    },
+    "minimum-stability": "dev"
 }

@@ -33,7 +33,7 @@ class TrustPayServiceProvider extends ServiceProvider
 
         // create image
         $app->singleton('trustpay', function ($app) {
-            //return new ImageManager($app['config']->get('trustpay'));
+            return new TrustPay($app['config']->get('trustpay'));
         });
 
         $app->alias('trustpay', 'Imcery\TrustPay\TrustPay');
