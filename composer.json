@@ -1,0 +1,12 @@
+{
+  "name": "imcery/trustpay-php",
+  "description": "TrustPay COPYandPAY package for Laravel 5",
+  "authors": [
+    {
+      "name": "Pavel Saparov",
+      "email": "pavel@imcery.com"
+    }
+  ],
+  "minimum-stability": "dev",
+  "require": {}
+}
