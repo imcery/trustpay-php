@@ -43,4 +43,12 @@ class TrustPayResponse
         return $this->response->result->description;
     }
 
+    /**
+     * @return \stdClass
+     */
+    public function getResponse()
+    {
+        return $this->response;
+    }
+
 }
