@@ -35,9 +35,12 @@ class TrustPayResponse
         return false;
     }
 
+    /**
+     * @return string
+     */
     public function getErrorMessage()
     {
-
+        return $this->response->result->description;
     }
 
 }
