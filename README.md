@@ -32,7 +32,7 @@ In the `$providers` array add the service providers for this package.
 Imcery\TrustPay\TrustPayServiceProvider::class
 ```
 
-Add the facade of this package to the $aliases array.
+Add the facade of this package to the `$aliases` array.
 ```
 'TrustPay' => Imcery\TrustPay\Facades\TrustPay::class
 ```  
