@@ -1,3 +1,23 @@
+### Installation
+
+Add the following to your `composer.json`:
+
+```
+{
+    "require": {
+        "imcery/trustpay-php": "dev-master"
+    },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url":  "git@github.com:imcery/trustpay-php.git"
+        }
+    ]
+}
+```
+
+Run `composer update` to install the package.
+
 ### Integration in Laravel
 
 
