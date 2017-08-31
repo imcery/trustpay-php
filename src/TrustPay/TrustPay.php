@@ -109,6 +109,7 @@ final class TrustPay
             'recurringType' => 'INITIAL',
             'amount' => $amount,
             'currency' => $currency,
+            'createRegistration' => 'true',
         ], $params);
 
         return $this->sendData('/checkouts', $postData);
@@ -143,18 +144,19 @@ final class TrustPay
     {
         $this->validate($transactionReference);
 
-        return $this->sendData('/payments/' . $transactionReference, [], 'GET');
+        return $this->sendData('/checkouts/'. $transactionReference . '/payment' , [], 'GET');
     }
 
     /**
-     * @param $checkoutId
+     * @param string $checkoutId
+     * @param string $returnUrl
      * @return string
      */
-    static public function renderForm($checkoutId)
+    static public function renderForm($checkoutId, $returnUrl)
     {
         return '
             <script async src="https://test.oppwa.com/v1/paymentWidgets.js?checkoutId='.$checkoutId.'"></script>
-            <form action="" class="paymentWidgets" data-brands="VISA MASTER"></form>
+            <form action="'.$returnUrl.'" class="paymentWidgets" data-brands="VISA MASTER"></form>
         ';
     }
 
@@ -176,22 +178,22 @@ final class TrustPay
     protected function sendData($resource, $data = [], $method = 'POST')
     {
         $ch = curl_init();
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_VERBOSE, 1);
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
         curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
-        curl_setopt($ch, CURLOPT_VERBOSE, 1);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 
         $authentication = [
             'authentication.userId' => $this->config['user_id'],
             'authentication.password' => $this->config['password'],
             'authentication.entityId' => $this->config['entity_id'],
         ];
+        $data = array_merge($data, $authentication);
 
         if ($method == 'POST') {
             curl_setopt($ch, CURLOPT_URL, $this->getEndpoint() . $resource);
             curl_setopt($ch, CURLOPT_POST, 1);
-            curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-type: application/x-www-form-urlencoded; charset=UTF-8']);
-            curl_setopt($ch, CURLOPT_POSTFIELDS, array_merge($data, $authentication));
+            curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
         } else if ($method == 'GET') {
             curl_setopt($ch, CURLOPT_URL, $this->getEndpoint() . $resource . '?' . http_build_query($authentication));
         }

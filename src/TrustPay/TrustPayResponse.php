@@ -10,7 +10,10 @@ class TrustPayResponse
 {
 
     /** @var \stdClass */
-    private $response;
+    public $response;
+
+    /** @var string */
+    public $original;
 
     /**
      * TrustPayResponse constructor.
@@ -20,6 +23,22 @@ class TrustPayResponse
     public function __construct($response)
     {
         $this->response = json_decode($response);
+        $this->original = $response;
+    }
+
+    /**
+     * Shortcut to obtain response parameters directly.
+     *
+     * @param $name
+     * @return mixed
+     */
+    public function __get($name)
+    {
+        if (strtolower($name) == 'errormessage') {
+            return $this->getErrorMessage();
+        }
+
+        return $this->response->$name;
     }
 
     /**
@@ -29,7 +48,7 @@ class TrustPayResponse
      */
     public function isSuccessful()
     {
-        if (preg_match('/^(000\.000\.|000\.100\.1|000\.[36])|^(000\.400\.0|000\.400\.100)/', $this->response->result->code)) {
+        if (preg_match('/^(000\.000\.|000\.100\.1|000\.[36])|^(000\.400\.0|000\.400\.100)|^(000\.200)/', $this->response->result->code)) {
             return true;
         }
         return false;
@@ -41,14 +60,6 @@ class TrustPayResponse
     public function getErrorMessage()
     {
         return $this->response->result->description;
-    }
-
-    /**
-     * @return \stdClass
-     */
-    public function getResponse()
-    {
-        return $this->response;
     }
 
 }
