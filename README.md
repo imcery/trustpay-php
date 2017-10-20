@@ -41,7 +41,7 @@ Now the TrustPay Class will be auto-loaded by Laravel.
 
 ### Configuration
 
-By default Imcery TrustPay uses PHP's cURL library extension to process all http requests.
+By default TrustPay-PHP uses PHP's cURL library extension to process all http requests.
 
 Publish configuration in Laravel 5
 
