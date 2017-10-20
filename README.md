@@ -1,27 +1,11 @@
 ### Installation
 
-Add the following to your `composer.json`:
-
-```
-{
-    "require": {
-        "imcery/trustpay-php": "dev-master"
-    },
-    "repositories": [
-        {
-            "type": "vcs",
-            "url":  "git@github.com:imcery/trustpay-php.git"
-        }
-    ]
-}
-```
-
-Run `composer update` to install the package.
+The installation is simple as `composer install imcery/trustpay-php`.
 
 ### Integration in Laravel
 
 
-Imcery TrustPay has optional support for Laravel and comes with a **Service Provider and Facades** for easy integration.
+TrustPay-PHP has an optional support for Laravel and comes with a **Service Provider and Facades** for easy integration.
 The `vendor/autoload.php` is included by Laravel, so you don't have to require or autoload manually. Just see the instructions below.
 
 After you have installed Imcery TrustPay, open your Laravel config file `config/app.php` and add the following lines.
@@ -35,7 +19,7 @@ Imcery\TrustPay\TrustPayServiceProvider::class
 Add the facade of this package to the `$aliases` array.
 ```
 'TrustPay' => Imcery\TrustPay\Facades\TrustPay::class
-```  
+```
 
 Now the TrustPay Class will be auto-loaded by Laravel.
 
@@ -49,5 +33,5 @@ Publish configuration in Laravel 5
 $ php artisan vendor:publish --provider="Imcery\TrustPay\TrustPayServiceProvider"
 ```
 
-In Laravel 5 applications the configuration file is copied to `config/trustpay.php`. 
+In Laravel 5 applications the configuration file is copied to `config/trustpay.php`.
 With this copy you can alter application credentials for TrustPay.
